@@ -6,82 +6,96 @@ interface PokemonDetailProps {
   pokemon: any; // We'll use 'any' for now and refine this later
 }
 
-export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
-  return (
-    <div className="container mx-auto p-4">
-      <div className="bg-[#cb4f47] rounded-lg shadow-lg p-6">
-        {/* Header with name and number */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
-          <span className="text-xl text-gray-500">#{pokemon.id.toString().padStart(3, '0')}</span>
-        </div>
-        
-        {/* Pokemon image */}
-        <div className="flex justify-center mb-6">
-          <GameboyScreen 
-            imageUrl={pokemon.sprites.other["official-artwork"].front_default}
-            alt={pokemon.name}
-          />
-        </div>
-        
-        {/* Type badges */}
-        <div className="flex gap-2 mb-6">
-          {pokemon.types.map((typeInfo: any) => (
-            <span 
-              key={typeInfo.type.name}
-              className={`px-3 py-1 rounded-full text-white capitalize ${getTypeColor(typeInfo.type.name)}`}
-            >
-              {typeInfo.type.name}
-            </span>
-          ))}
-        </div>
-        
-        {/* Basic info */}
-        <div className="grid grid-cols-2 gap-4 mb-6">
-          <div>
-            <h2 className="text-lg font-semibold">Height</h2>
-            <p>{(pokemon.height / 10).toFixed(1)} m</p>
+interface PokemonDetailProps {
+    pokemon: any; // We'll use 'any' for now and refine this later
+  }
+  
+  export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="bg-[#cb4f47] rounded-lg shadow-lg p-6">
+          {/* Header with name and number */}
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
+            <span className="text-xl text-gray-500">#{pokemon.id.toString().padStart(3, '0')}</span>
           </div>
-          <div>
-            <h2 className="text-lg font-semibold">Weight</h2>
-            <p>{(pokemon.weight / 10).toFixed(1)} kg</p>
-          </div>
-        </div>
-        
-        {/* Stats */}
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold mb-2">Stats</h2>
-          {pokemon.stats.map((stat: any) => (
-            <div key={stat.stat.name} className="mb-2">
-              <div className="flex justify-between">
-                <span className="capitalize">{formatStatName(stat.stat.name)}</span>
-                <span>{stat.base_stat}</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div 
-                  className="bg-blue-600 h-2.5 rounded-full" 
-                  style={{ width: `${Math.min(100, (stat.base_stat / 255) * 100)}%` }}
-                ></div>
+  
+          {/* Pokemon image with Gameboy Screen */}
+          <div className="gameboy-screen-container">
+          {/* This div now acts as the dark outer layer & container */}
+          <div className="gameboy-screen-border">
+            {/* Add this new inner wrapper for content */}
+            <div className="gameboy-screen-content-area">
+              <GameboyScreen
+                imageUrl={pokemon.sprites.other['official-artwork'].front_default}
+                alt={pokemon.name}
+              />
+              <div className="gameboy-screen-name">
+                {pokemon.name}
               </div>
             </div>
-          ))}
+            {/* The ::after pseudo-element will be generated here by CSS */}
+          </div>
         </div>
-        
-        {/* Navigation */}
-        <div className="flex justify-between">
-          {pokemon.id > 1 && (
-            <Link href={`/pokemon/${pokemon.id - 1}`} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-              Previous
+  
+          {/* Type badges */}
+          <div className="flex gap-2 mb-6">
+            {pokemon.types.map((typeInfo: any) => (
+              <span
+                key={typeInfo.type.name}
+                className={`px-3 py-1 rounded-full text-white capitalize ${getTypeColor(typeInfo.type.name)}`}
+              >
+                {typeInfo.type.name}
+              </span>
+            ))}
+          </div>
+  
+          {/* Basic info */}
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div>
+              <h2 className="text-lg font-semibold">Height</h2>
+              <p>{(pokemon.height / 10).toFixed(1)} m</p>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold">Weight</h2>
+              <p>{(pokemon.weight / 10).toFixed(1)} kg</p>
+            </div>
+          </div>
+  
+          {/* Stats */}
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-2">Stats</h2>
+            {pokemon.stats.map((stat: any) => (
+              <div key={stat.stat.name} className="mb-2">
+                <div className="flex justify-between">
+                  <span className="capitalize">{formatStatName(stat.stat.name)}</span>
+                  <span>{stat.base_stat}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2.5">
+                  <div
+                    className="bg-blue-600 h-2.5 rounded-full"
+                    style={{ width: `${Math.min(100, (stat.base_stat / 255) * 100)}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+  
+          {/* Navigation */}
+          <div className="flex justify-between">
+            {pokemon.id > 1 && (
+              <Link href={`/pokemon/${pokemon.id - 1}`} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+                Previous
+              </Link>
+            )}
+            <Link href={`/pokemon/${pokemon.id + 1}`} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+              Next
             </Link>
-          )}
-          <Link href={`/pokemon/${pokemon.id + 1}`} className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-            Next
-          </Link>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
 // Helper functions
 function getTypeColor(type: string): string {

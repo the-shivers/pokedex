@@ -45,3 +45,68 @@ body {
 .vt323 {
   font-family: var(--font-vt323); /* Use the CSS variable here */
 }
+
+:root {
+  /* --- Configuration Variables --- */
+  --wall-thickness: 4px;   /* Adjust the thickness of the inset 'wall' */
+  --border-rad: 8px;     /* The rounding of the corners (0.5rem) */
+
+  /* --- Color Palette --- */
+  --screen-bg-base: #d1d5db;     /* Light gray content background (gray-300) */
+  --screen-wall-dark: #a3a6ad;   /* Darker wall color (top/right) (gray-400/500) */
+  /* --screen-wall-light: #f9fafb; -- Removed */
+  --screen-text-color: #4b5563;  /* Text color on screen (gray-600) */
+}
+
+.gameboy-screen-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px; /* Or 20rem */
+  margin: 1.25rem auto;
+}
+
+.gameboy-screen-border {
+  position: relative; /* Needed for positioning the ::before element */
+  border-radius: var(--border-rad);
+  background-color: var(--screen-bg-base); /* Base background color */
+  /* No padding needed on the border element itself */
+  overflow: hidden; /* Clip the ::before element to the rounded corners */
+}
+
+/* Creates the dark layer that will be partially revealed */
+.gameboy-screen-border::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* Cover the entire parent */
+  background-color: var(--screen-wall-dark); /* Dark color */
+  border-radius: inherit; /* Match parent rounding */
+  z-index: 0; /* Sit behind the content area */
+}
+
+/* The actual content area holding the screen and name */
+.gameboy-screen-content-area {
+  position: relative; /* Sits on top of ::before */
+  z-index: 1; /* Ensure it's above the ::before pseudo-element */
+  background-color: var(--screen-bg-base); /* Match parent background */
+  padding: 1.25rem; /* Inner padding for the screen image/text */
+
+  /* Apply margin to reveal the dark ::before layer ONLY on top and right */
+  margin-top: var(--wall-thickness);
+  margin-right: var(--wall-thickness);
+  margin-bottom: 0;
+  margin-left: 0;
+  /* Short hand: margin: var(--wall-thickness) var(--wall-thickness) 0 0; */
+
+  /* Apply rounding, adjusted slightly for the inset */
+  border-radius: max(0px, calc(var(--border-rad) - var(--wall-thickness) / 2));
+  /* Or try inheriting if the curve looks better: */
+  /* border-radius: inherit; */
+}
+
+.gameboy-screen-name {
+  text-align: center;
+  margin-top: 0.625rem; /* 10px */
+  font-family: var(--font-vt323);
+  text-transform: capitalize;
+  color: var(--screen-text-color); /* Use variable */
+}
