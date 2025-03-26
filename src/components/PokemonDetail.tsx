@@ -9,7 +9,7 @@ interface PokemonDetailProps {
 export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
   return (
     <div className="container mx-auto p-4">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-[#cb4f47] rounded-lg shadow-lg p-6">
         {/* Header with name and number */}
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
