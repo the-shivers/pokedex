@@ -18,13 +18,6 @@ export default function PokemonDetail({ pokemon }: PokemonDetailProps) {
         
         {/* Pokemon image */}
         <div className="flex justify-center mb-6">
-          {/* <Image 
-            src={pokemon.sprites.other["official-artwork"].front_default}
-            width={400}
-            height={400}
-            alt={pokemon.name}
-            priority
-          /> */}
           <GameboyScreen 
             imageUrl={pokemon.sprites.other["official-artwork"].front_default}
             alt={pokemon.name}
