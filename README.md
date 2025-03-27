@@ -1,4 +1,4 @@
-<img width="500" alt="image" src="https://github.com/user-attachments/assets/86029d24-0ed7-4c19-b967-ce7a3bf72dfb" />
+<p align="center"><img width="500" alt="image" src="https://github.com/user-attachments/assets/86029d24-0ed7-4c19-b967-ce7a3bf72dfb" /></p>
 
 # Description
 This is a simple Pokédex application built using NextJS (with TypeScript and Tailwind CSS). By entering the ID of a pokémon, or using the arrows to cycle through them, it displays a picture of that pokemon along with some basic information about it including stats, height, weight, description, and the pokémon's audio cry. It's styled to resemble an actual pokédex, with thoughtful design touches featured throughout including fun indicator lights and a GameBoy-like screen.
