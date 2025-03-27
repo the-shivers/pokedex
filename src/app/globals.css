@@ -49,6 +49,6 @@ body {
 }
 
 .scanlines {
-  background-image: linear-gradient(rgba(15,56,15,0.05) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(15,56,15,0.04) 1px, transparent 1px);
   background-size: 100% 4px;
 }
