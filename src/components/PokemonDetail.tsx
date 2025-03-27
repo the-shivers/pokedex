@@ -39,6 +39,22 @@ export default function PokemonDetail({ pokemon, pokemonSpecies }: PokemonDetail
   const [isLeftLightOn, setIsLeftLightOn] = useState(false);
   const [isRightLightOn, setIsRightLightOn] = useState(false);
   const [activeTopLight, setActiveTopLight] = useState(0); // 0=red, 1=yellow, 2=green
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [hasMounted, setHasMounted] = useState(false); // Helps avoid hydration issues
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  // Resize effect (literally JUST for hiding lights on the smallest screens)
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, [hasMounted]);
 
   // Light cycling effect
   useEffect(() => {
@@ -53,10 +69,6 @@ export default function PokemonDetail({ pokemon, pokemonSpecies }: PokemonDetail
     if (lightsToAffect.includes('left')) setIsLeftLightOn(turnOn);
     if (lightsToAffect.includes('right')) setIsRightLightOn(turnOn);
   };
-
-  if (!pokemon || !pokemonSpecies) {
-    return <div className="mx-auto p-4">Loading...</div>;
-  }
 
   // Description--1st flavor text entry isn't always English, so we'll grab the first one.
   const descriptionText = pokemonSpecies?.flavor_text_entries?.find(
@@ -132,11 +144,26 @@ export default function PokemonDetail({ pokemon, pokemonSpecies }: PokemonDetail
               FrameSetDex
           </h1>
 
-          <div className="flex items-center space-x-2">
-              <div className={`${topLightBase} ${activeTopLight === 0 ? topLightRedOn : topLightRedOff}`}></div>
-              <div className={`${topLightBase} ${activeTopLight === 1 ? topLightYellowOn : topLightYellowOff}`}></div>
-              <div className={`${topLightBase} ${activeTopLight === 2 ? topLightGreenOn : topLightGreenOff}`}></div>
+          {/* <div className="flex items-center space-x-2" style={{ display: windowWidth < 380 ? 'none' : 'flex' }}>
+            <div className={`${topLightBase} ${activeTopLight === 0 ? topLightRedOn : topLightRedOff}`}></div>
+            <div className={`${topLightBase} ${activeTopLight === 1 ? topLightYellowOn : topLightYellowOff}`}></div>
+            <div className={`${topLightBase} ${activeTopLight === 2 ? topLightGreenOn : topLightGreenOff}`}></div>
+          </div> */}
+
+          {/* ---- THE FIX ---- */}
+          {/* Use conditional classes based on mount status and width */}
+          {/* Default to 'flex' (server/initial render), hide only if mounted and width is small */}
+          <div className={`items-center space-x-2 ${hasMounted && windowWidth < 380 ? 'hidden' : 'flex'}`}>
+            {/* Only render lights if mounted? Or let them render but be hidden by parent? Let's render them. */}
+            {hasMounted && ( // Alternatively, only render the lights if mounted (optional optimization)
+              <>
+                <div className={`${topLightBase} ${activeTopLight === 0 ? topLightRedOn : topLightRedOff}`}></div>
+                <div className={`${topLightBase} ${activeTopLight === 1 ? topLightYellowOn : topLightYellowOff}`}></div>
+                <div className={`${topLightBase} ${activeTopLight === 2 ? topLightGreenOn : topLightGreenOff}`}></div>
+              </>
+            )}
           </div>
+          {/* ---- END FIX ---- */}
 
         </div>
       </div>
