@@ -143,19 +143,8 @@ export default function PokemonDetail({ pokemon, pokemonSpecies }: PokemonDetail
           <h1 className="text-4xl tracking-wider pl-20 drop-shadow-[1px_1px_1px_rgba(0,0,0,0.5)]">
               FrameSetDex
           </h1>
-
-          {/* <div className="flex items-center space-x-2" style={{ display: windowWidth < 380 ? 'none' : 'flex' }}>
-            <div className={`${topLightBase} ${activeTopLight === 0 ? topLightRedOn : topLightRedOff}`}></div>
-            <div className={`${topLightBase} ${activeTopLight === 1 ? topLightYellowOn : topLightYellowOff}`}></div>
-            <div className={`${topLightBase} ${activeTopLight === 2 ? topLightGreenOn : topLightGreenOff}`}></div>
-          </div> */}
-
-          {/* ---- THE FIX ---- */}
-          {/* Use conditional classes based on mount status and width */}
-          {/* Default to 'flex' (server/initial render), hide only if mounted and width is small */}
           <div className={`items-center space-x-2 ${hasMounted && windowWidth < 380 ? 'hidden' : 'flex'}`}>
-            {/* Only render lights if mounted? Or let them render but be hidden by parent? Let's render them. */}
-            {hasMounted && ( // Alternatively, only render the lights if mounted (optional optimization)
+            {hasMounted && (
               <>
                 <div className={`${topLightBase} ${activeTopLight === 0 ? topLightRedOn : topLightRedOff}`}></div>
                 <div className={`${topLightBase} ${activeTopLight === 1 ? topLightYellowOn : topLightYellowOff}`}></div>
@@ -163,8 +152,6 @@ export default function PokemonDetail({ pokemon, pokemonSpecies }: PokemonDetail
               </>
             )}
           </div>
-          {/* ---- END FIX ---- */}
-
         </div>
       </div>
 
