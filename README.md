@@ -7,7 +7,7 @@ This is a frontend only project! Because all the information we need is availabl
 
 # Setup instructions
 
-This is a classic NextJS project with no exotic components or requirements (created simply with npx create-next-app@latest). So you can simply follow these steps to get the project running on your local machine for development and testing purposes.
+This is a classic NextJS project with no exotic components or requirements (created simply with `npx create-next-app@latest`). So you can simply follow these steps to get the project running on your local machine for development and testing purposes.
 
 ## Prerequisites
 *   [Node.js](https://nodejs.org/)
