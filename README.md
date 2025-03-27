@@ -1,17 +1,42 @@
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/86029d24-0ed7-4c19-b967-ce7a3bf72dfb" />
 
-Readme! TBD.
-
 # Setup instructions
-lorem ipsum bla bla bla
+
+This is a classic NextJS project with no exotic components or requirements (created simply with npx create-next-app@latest). So you can simply follow these steps to get the project running on your local machine for development and testing purposes.
+
+## Prerequisites
+*   [Node.js](https://nodejs.org/)
+*   [npm](https://www.npmjs.com/)
+
+## Installation & Running
+
+1.  **Clone the repo:**
+    ```bash
+    git clone https://github.com/the-shivers/pokedex.git
+    ```
+
+2.  **Install dependencies:**
+    Make sure you're in the project directory, then:
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  **View the application:**
+    Open your web browser and navigate to [http://localhost:3000](http://localhost:3000). Voila!
 
 # Description
-lorem lorem ipsum ipsum bla
-<img width="200" alt="pokedex image" src="https://i.etsystatic.com/20531433/r/il/281a31/3649640803/il_1588xN.3649640803_lqsi.jpg">
+This is a simple Pokédex application built using NextJS (with TypeScript and Tailwind CSS). By entering the ID of a pokémon, or using the arrows to cycle through them, it displays a picture of that pokemon along with some basic information about it including stats, height, weight, description, and the pokémon's audio cry. It's styled to resemble an actual pokédex, with thoughtful design touches featured throughout including fun indicator lights and a GameBoy-like screen.
+
+This is a frontend only project! Because all the information we need is available via the PokéAPI, we can simply fetch what we need on demand. If I were to implement a backend, I would probably do so using NextJS (which is a full stack framework), but for this project, there was no need.
 
 # Limitations and Future Improvements
 ## Retrospective
-While the decision to model this on a Pokédex was a fun idea, it led to some serious design issues. Most notably, the actual Pokédex is covered in useless nonsense buttons and lights. These aren't a problem when it's just something you look at, but it leads to a very poor UI/UX experience when implemented on a website. For example, the two red circles above the "screen"--what could these _possibly_ be for? I made them light up when mousing over or clicking on the next/previous buttons, but really they serve no actual purpose. Another example would be the diagonal shape on the navbar--there's no reason for it to be like that, and it just makes implementing changes slower and more challenging. Things like this constantly forced me to choose between being faithful to what the Pokédex actually looks like and web design best practices.
+While the decision to model this on a Pokédex (like [this](https://i.etsystatic.com/20531433/r/il/281a31/3649640803/il_1588xN.3649640803_lqsi.jpg) one) was a fun idea, it led to some serious design issues. Most notably, the actual Pokédex is covered in useless nonsense buttons and lights. These aren't a problem when it's just something you look at, but it leads to a very poor UI/UX experience when implemented on a website. For example, the two red circles above the "screen"--what could these _possibly_ be for? I made them light up when mousing over or clicking on the next/previous buttons, but really they serve no actual purpose. Another example would be the diagonal shape on the navbar--there's no reason for it to be like that, and it just makes implementing changes slower and more challenging. Things like this constantly forced me to choose between being faithful to what the Pokédex actually looks like and web design best practices (and to be frank, it made this take longer than I would have liked, haha).
 
 Were I to embark on this project again, I would definitely opt for a much more conventional design, like the ones seen on Serebii or Bulbapedia!
 
